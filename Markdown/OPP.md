@@ -47,4 +47,33 @@ if(member.getDate().getTime()){ // 데미테르 법칙 위반, Member 객체의 
 
 - 다형성 : 한 객체가 여러 가지의 모습을 갖는다는 것을 의미
 - 구현 상속 : 클래스 상속을 통해서 이루어지며 보통 상위 클래스에 정의된 기능을 재사용하기 위한 목적으로 사용됨
-- 
+- 추상화 : 데이터나 프로세스 등을 의미가 비슷한 개념이나 표현으로 정의함.
+
+```java
+interface LogCollector{
+    void collect();
+} 
+
+LogCollector collector = createLogCollector();
+collector.collect(); // 상속받은 클래스의 collect가 실행됌.
+
+```
+
+- 추상화의 유연함
+
+```java
+/*추상화하지 않는 예제, if elss 블락이 계속 늘어나며, 본연의 책임(흐름제어)와 상관없는 데이터 읽기도 변경해야함*/
+
+if(useFile()){
+    FiledataRedaer fileReader = new FileDataReader();
+    data = fileReader.read();
+}else{
+    SocketDataReader socketReader = new SockerReader();
+    data = socketReader.read();
+}
+
+```
+
+```java
+
+```
