@@ -82,4 +82,58 @@ public class ZippedResponseSender extends ResponseSender{
 }
 ```
 
+3. 리스코프 치환 원칙(Liskov substitution principle)
 
+> 상위 타입의 객체를 하위 타입의 객체로 치환해도 상위 타입을 사용하는 프로그램은 정상적으로 동작해야한다.
+
+- 명시된 명세에서 벗어난 값을 리턴, 익셉션을 발생, 기능을 수행하면 위반
+- 리스코프 치환 원칙은 계약(기능 명세)과 확장에 관한것. 
+- 개방 폐쇄의 원칙과 밀접한 관련을 가짐
+
+```java
+public class Rectangle {
+    private int width;
+    private int height;
+    
+    public void setWidth(int width){
+        this.width = width;
+    }
+    public void setHeight(int height){
+        this.height = height;
+    }
+    public void getWidth(){
+        return width;
+    }
+    public void getHeight(){
+        return height;
+    }
+}
+
+/* 잘못된 예, Rectangle의 setWidth와 setHeight는 각각 높이값, 폭값만 변경된다고 명세되어있지만,
+* 아래의 경우에는 두가지를 함*/
+
+public class Square extends Rectangle{
+    @Override
+    public void setWidth(int width){
+        super.setWidth(width);
+        super.setHeight(width);
+    }
+    @Override
+    public void setHeight(int height){
+        super.setWidth(height);
+        super.setHeight(height);
+    }
+        
+}
+
+public class Main{
+    /*이 경우 square로 다운캐스팅하게 되면, 문제가 생김*/
+    public void increseHeight(Rectangle rectangle){
+        rectangle.setHeight(rectangle.setWidth()+10);
+    }
+}
+```
+
+4. 인터페이스 분리 원칙 (Interface segregation principle)
+
+> 인터페이스는 그 인터페이스를 사용하는 클라이언트를 기준으로 분리해야한다.
