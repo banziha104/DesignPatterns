@@ -155,3 +155,23 @@ public class Main{
         2. 알고리즘으로 암호화한다
         3. 파일에 바이트 데이터를 쓴다.
         
+- 의존 역전 원칙을 통한 변경의 유연함을 확보하기 위함.
+
+
+```java
+/*올바르지 않은 예
+* FlowContoller가 하위 객체인 FileDataReader에 의존함*/
+public class FlowController{
+    public void process(){
+        FileDataReader reader = new FileDataReader(); // 의존 발생
+    }
+}
+```
+
+```java
+/* 올바른 예
+ * FileDataReader 클래스의 소스코드가 추상화 타입인 ByteSource에 의존하게 됌 */
+public class FileDataReader implements ByteSoruce{
+    
+}
+```
