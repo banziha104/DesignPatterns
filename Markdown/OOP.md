@@ -47,6 +47,7 @@ if(member.getDate().getTime()){ // 데미테르 법칙 위반, Member 객체의 
 
 - 다형성 : 한 객체가 여러 가지의 모습을 갖는다는 것을 의미
 - 구현 상속 : 클래스 상속을 통해서 이루어지며 보통 상위 클래스에 정의된 기능을 재사용하기 위한 목적으로 사용됨
+- Mock 객체 : 실제 클래스 대신에 신짜처럼 행동하는 객체를 뜻함.
 - 추상화 : 데이터나 프로세스 등을 의미가 비슷한 개념이나 표현으로 정의함.
 
 ```java
@@ -75,5 +76,27 @@ if(useFile()){
 ```
 
 ```java
+/*추상화 한 예제*/
+public interface ByteSource{
+    byte[] read();
+}
 
+public class FileDataReader implements ByteSource{
+    //read 구현
+}
+
+public class SocketDataReader implements ByteSource{
+    //read 구현
+}
 ```
+
+```java
+ByteSource source =null;
+if(useFile) source = new FileDataReader();
+else source = new SocketDataReader();
+byte[] data = source.read();
+```
+
+<br>
+
+---
